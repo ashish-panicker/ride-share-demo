@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/rides")
 public class RideController {
