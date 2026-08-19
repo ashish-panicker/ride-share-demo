@@ -17,18 +17,27 @@ public class RideController {
         this.passengerClient = passengerClient;
     }
 
+    private RideDto mapToDto(Ride r) {
+        return new RideDto(r.getId(), r.getPassengerId(), r.getDriverId(), r.getStatus());
+    }
+
     @PostMapping
-    public Ride createRide(@Valid @RequestBody Ride ride) {
-        log.info("Requesting ride for passenger {}", ride.getPassengerId());
-        String passengerInfo = passengerClient.getPassenger(ride.getPassengerId());
+    public RideDto createRide(@Valid @RequestBody RideDto dto) {
+        log.info("Requesting ride for passenger {}", dto.passengerId());
+        String passengerInfo = passengerClient.getPassenger(dto.passengerId());
         log.info("Passenger info: {}", passengerInfo);
         
+        Ride ride = new Ride();
+        ride.setPassengerId(dto.passengerId());
+        ride.setDriverId(dto.driverId());
         ride.setStatus("REQUESTED");
-        return repository.save(ride);
+        
+        Ride saved = repository.save(ride);
+        return mapToDto(saved);
     }
     
     @GetMapping("/{id}")
-    public Ride getRide(@PathVariable Long id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Not found"));
+    public RideDto getRide(@PathVariable Long id) {
+        return repository.findById(id).map(this::mapToDto).orElseThrow(() -> new RuntimeException("Not found"));
     }
 }
