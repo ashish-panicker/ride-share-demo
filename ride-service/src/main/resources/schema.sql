@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS ride (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    passenger_id BIGINT, driver_id BIGINT, status VARCHAR(50)
+);
