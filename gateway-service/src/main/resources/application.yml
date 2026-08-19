@@ -11,15 +11,6 @@ spring:
             '[/**]':
               allowed-origins: "*"
               allowed-methods: "*"
-        routes:
-        - id: passenger-service
-          uri: lb://PASSENGER-SERVICE
-          predicates:
-          - Path=/api/passengers/**
-        - id: ride-service
-          uri: lb://RIDE-SERVICE
-          predicates:
-          - Path=/api/rides/**
 
 eureka:
   client:
