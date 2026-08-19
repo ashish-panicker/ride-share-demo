@@ -23,7 +23,7 @@ public class RideServiceImpl implements RideService {
         return new RideDto(r.getId(), r.getPassengerId(), r.getDriverId(), r.getStatus(), null);
     }
 
-    private RideDto mapToDtoWithDetails(Ride r, String details) {
+    private RideDto mapToDtoWithDetails(Ride r, Object details) {
         return new RideDto(r.getId(), r.getPassengerId(), r.getDriverId(), r.getStatus(), details);
     }
 
@@ -39,7 +39,7 @@ public class RideServiceImpl implements RideService {
 
     @Override
     public RideDto requestRide(RideDto dto) {
-        String passengerInfo = passengerClient.getPassenger(dto.passengerId());
+        Object passengerInfo = passengerClient.getPassenger(dto.passengerId());
         
         Ride ride = new Ride();
         ride.setPassengerId(dto.passengerId());

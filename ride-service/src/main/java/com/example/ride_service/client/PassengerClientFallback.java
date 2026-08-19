@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PassengerClientFallback implements PassengerClient {
     @Override
-    public String getPassenger(Long id) {
-        return "{\"fallback\": true, \"message\": \"Passenger service unavailable\"}";
+    public Object getPassenger(Long id) {
+        return "Passenger service unavailable";
     }
 }

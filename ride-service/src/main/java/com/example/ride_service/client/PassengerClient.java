@@ -7,5 +7,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name = "passengerService", url = "${passenger.service.url}", fallback = PassengerClientFallback.class)
 public interface PassengerClient {
     @GetMapping("/api/passengers/{id}")
-    String getPassenger(@PathVariable("id") Long id);
+    Object getPassenger(@PathVariable("id") Long id);
 }

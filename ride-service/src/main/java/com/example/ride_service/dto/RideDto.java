@@ -9,5 +9,5 @@ public record RideDto(
     @NotNull Long passengerId,
     Long driverId,
     String status,
-    String passengerDetails
+    Object passengerDetails
 ) {}
