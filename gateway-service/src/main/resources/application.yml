@@ -1,0 +1,29 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      mvc:
+        globalcors:
+          cors-configurations:
+            '[/**]':
+              allowed-origins: "*"
+              allowed-methods: "*"
+        routes:
+        - id: passenger-service
+          uri: lb://PASSENGER-SERVICE
+          predicates:
+          - Path=/api/passengers/**
+        - id: ride-service
+          uri: lb://RIDE-SERVICE
+          predicates:
+          - Path=/api/rides/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
