@@ -25,6 +25,11 @@ Manages ride requests and trip lifecycle. It will communicate with the Passenger
 
 ## 3. Architecture & Components
 
+### Application Design
+- **Layered Architecture:** The services will be structured using a strict layered architecture pattern (`Controller` -> `Service` -> `Repository`). Business logic will be isolated in the Service layer.
+- **Data Transfer Objects (DTOs):** Java `record`s will be exclusively used as DTOs for all API requests and responses to ensure immutability and concise data carrier structures. Mapping between Entities and DTOs will occur at the Service layer.
+
+### Cloud Features
 The application will leverage the following Spring Cloud features:
 
 - **Service Registry (Eureka Server):** Both `Passenger Service` and `Ride Service` will register themselves with the Eureka Server. This allows for dynamic service discovery.
