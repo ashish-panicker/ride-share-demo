@@ -1,7 +1,7 @@
 # Ride Share Application - Technical Design Document
 
 ## 1. Overview
-This document outlines the architecture and design of a microservices-based Ride Share demo application using Spring Boot. The goal is to build two interacting microservices and demonstrate the use of key Spring Cloud components: Eureka Server, API Gateway, RestClient, and Circuit Breaker.
+This document outlines the architecture and design of a microservices-based Ride Share demo application using Spring Boot. The goal is to build two interacting microservices and demonstrate the use of key Spring Cloud components: Eureka Server, API Gateway, OpenFeign, and Circuit Breaker.
 
 ## 2. Proposed Microservices
 We will build the following two microservices:
@@ -21,7 +21,7 @@ Manages ride requests and trip lifecycle. It will communicate with the Passenger
   - `POST /rides` - Request a new ride (includes payload validation).
   - `GET /rides/{id}` - Get ride status.
   - `PUT /rides/{id}/status` - Update the ride status (e.g., STARTED, COMPLETED).
-- **Integration:** Uses `RestClient` to fetch data from the Passenger Service.
+- **Integration:** Uses `OpenFeign` to fetch data from the Passenger Service.
 
 ## 3. Architecture & Components
 
@@ -29,8 +29,8 @@ The application will leverage the following Spring Cloud features:
 
 - **Service Registry (Eureka Server):** Both `Passenger Service` and `Ride Service` will register themselves with the Eureka Server. This allows for dynamic service discovery.
 - **API Gateway:** A single entry point for all client requests. It will route traffic to the respective microservices based on the URL path (e.g., `/api/passengers/**` to Passenger Service, `/api/rides/**` to Ride Service).
-- **Synchronous Communication (RestClient):** The `Ride Service` will use Spring's modern `RestClient` to make HTTP calls to the `Passenger Service`.
-- **Fault Tolerance (Circuit Breaker):** We will implement a Circuit Breaker (via Resilience4j) on the `RestClient` calls within the `Ride Service`. If the `Passenger Service` is down or unresponsive, the Circuit Breaker will prevent cascading failures and return a fallback response.
+- **Synchronous Communication (OpenFeign):** The `Ride Service` will use Spring Cloud `OpenFeign` to make HTTP calls to the `Passenger Service`.
+- **Fault Tolerance (Circuit Breaker):** We will implement a Circuit Breaker (via Resilience4j) on the `OpenFeign` calls within the `Ride Service`. If the `Passenger Service` is down or unresponsive, the Circuit Breaker will prevent cascading failures and return a fallback response.
 
 ## 4. Technology Stack
 - **Framework:** Spring Boot
