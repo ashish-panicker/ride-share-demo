@@ -1,0 +1,15 @@
+Ride share application
+
+This is a microservice based demo application developed using spring boot for learning purpose only.
+
+Tasks
+  - Create 2 services that are relevant to this ride share domain
+  - Both services must implement multiple endpoints that are necessary for its working
+  - Maintain data in memory, using h2 database.
+  - Use schema.sql and data.sql 
+  - Use validation
+
+I want to demonstrate the use of RestClient, Eureka Server, API Gateway and Circuit Breaker using this demo.
+We will build the demos once we finalise what services we are building.
+
+Do not start building anything, write your understanding into a technical document, once that is clear we will proceed to writing. 
