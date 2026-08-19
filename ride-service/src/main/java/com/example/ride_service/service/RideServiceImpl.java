@@ -41,6 +41,11 @@ public class RideServiceImpl implements RideService {
     public RideDto requestRide(RideDto dto) {
         Object passengerInfo = passengerClient.getPassenger(dto.passengerId());
         
+        // If passenger service is unreachable or passenger does not exist, the fallback returns this string
+        if (passengerInfo == null || "Passenger service unavailable".equals(passengerInfo)) {
+            throw new IllegalArgumentException("Cannot create ride: Passenger not found or Passenger Service is unavailable.");
+        }
+        
         Ride ride = new Ride();
         ride.setPassengerId(dto.passengerId());
         ride.setDriverId(dto.driverId());

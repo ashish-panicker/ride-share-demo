@@ -33,4 +33,10 @@ public class RideController {
     public RideDto requestRide(@Valid @RequestBody RideDto dto) {
         return rideService.requestRide(dto);
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleIllegalArgumentException(IllegalArgumentException ex) {
+        return ex.getMessage();
+    }
 }
