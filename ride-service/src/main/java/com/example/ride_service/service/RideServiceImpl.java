@@ -20,7 +20,11 @@ public class RideServiceImpl implements RideService {
     }
 
     private RideDto mapToDto(Ride r) {
-        return new RideDto(r.getId(), r.getPassengerId(), r.getDriverId(), r.getStatus());
+        return new RideDto(r.getId(), r.getPassengerId(), r.getDriverId(), r.getStatus(), null);
+    }
+
+    private RideDto mapToDtoWithDetails(Ride r, String details) {
+        return new RideDto(r.getId(), r.getPassengerId(), r.getDriverId(), r.getStatus(), details);
     }
 
     @Override
@@ -43,6 +47,6 @@ public class RideServiceImpl implements RideService {
         ride.setStatus("REQUESTED");
         
         Ride saved = repository.save(ride);
-        return mapToDto(saved);
+        return mapToDtoWithDetails(saved, passengerInfo);
     }
 }
