@@ -2,7 +2,7 @@
 
 echo "Compiling all services..."
 mvn clean compile -f discovery-service/pom.xml || exit 1
-mvn clean compile -f pasenger-service/pom.xml || exit 1
+mvn clean compile -f passenger-service/pom.xml || exit 1
 mvn clean compile -f ride-service/pom.xml || exit 1
 mvn clean compile -f gateway-service/pom.xml || exit 1
 echo "Compilation passed."
@@ -18,7 +18,7 @@ for i in {1..30}; do
 done
 
 echo "Starting passenger, ride, and gateway services..."
-mvn spring-boot:run -f pasenger-service/pom.xml > passenger.log 2>&1 &
+mvn spring-boot:run -f passenger-service/pom.xml > passenger.log 2>&1 &
 PID2=$!
 mvn spring-boot:run -f ride-service/pom.xml > ride.log 2>&1 &
 PID3=$!
