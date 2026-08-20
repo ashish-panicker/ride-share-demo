@@ -27,6 +27,11 @@ public class RideServiceImpl implements RideService {
         return new RideDto(r.getId(), r.getPassengerId(), r.getDriverId(), r.getStatus(), details);
     }
 
+    private RideDto mapToDtoWithNull(Ride r, Object details) {
+        return new RideDto(null, null, null, null, details);
+    }
+
+
     @Override
     public List<RideDto> getAllRides() {
         return repository.findAll().stream().map(this::mapToDto).collect(Collectors.toList());
@@ -43,7 +48,8 @@ public class RideServiceImpl implements RideService {
         
         // If passenger service is unreachable or passenger does not exist, the fallback returns this string
         if (passengerInfo == null || "Passenger service unavailable".equals(passengerInfo)) {
-            throw new IllegalArgumentException("Cannot create ride: Passenger not found or Passenger Service is unavailable.");
+            return mapToDtoWithNull(new Ride(), passengerInfo);
+            // throw new IllegalArgumentException("Cannot create ride: Passenger not found or Passenger Service is unavailable.");
         }
         
         Ride ride = new Ride();

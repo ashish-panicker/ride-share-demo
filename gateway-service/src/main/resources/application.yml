@@ -5,13 +5,12 @@ spring:
     name: gateway-service
   cloud:
     gateway:
-      mvc:
+      webmvc:
         globalcors:
           cors-configurations:
             '[/**]':
               allowed-origins: "*"
               allowed-methods: "*"
-
 eureka:
   client:
     service-url:
